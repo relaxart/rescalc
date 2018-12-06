@@ -13,6 +13,10 @@ func main() {
 	if len(vegeta) < 1 || len(dockerStat) < 1 {
 		fmt.Println("You must pass two file result from vegeta[1] and docker stat[2]")
 	} else {
-		readDockerStat(dockerStat[0])
+		ds := readDockerStat(dockerStat[0])
+		v := readVegeta(vegeta[0])
+
+		fmt.Println(ds)
+		fmt.Println(v)
 	}
 }

@@ -17,6 +17,20 @@ type dockerStat struct {
 	Memory    memory
 }
 
+type latency struct {
+	Total int
+	Mean  int
+	P50th int `json:"50th"`
+	P95th int `json:"95th"`
+	P99th int `json:"99th"`
+	Max   int
+}
+
+type vegeta struct {
+	Requests  int
+	Latencies latency
+}
+
 func readDockerStat(file string) dockerStat {
 	var ds dockerStat
 
@@ -25,20 +39,18 @@ func readDockerStat(file string) dockerStat {
 		fmt.Println("Can't read file :", file, "Error : ", err)
 	} else {
 		json.Unmarshal(f, &ds)
-		fmt.Println(ds)
 	}
 	return ds
 }
 
-func readVegeta(file string) dockerStat {
-	var ds dockerStat
+func readVegeta(file string) vegeta {
+	var v vegeta
 
 	f, err := ioutil.ReadFile(file)
 	if err != nil {
 		fmt.Println("Can't read file :", file, "Error : ", err)
 	} else {
-		json.Unmarshal(f, &ds)
-		fmt.Println(ds)
+		json.Unmarshal(f, &v)
 	}
-	return ds
+	return v
 }
