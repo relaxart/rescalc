@@ -1,17 +1,18 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 )
 
 func main() {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Add stress test file: ")
-	vegetta, _ := reader.ReadString('\n')
-	fmt.Println(vegetta)
-	fmt.Print("Add config file: ")
-	config, _ := reader.ReadString('\n')
-	fmt.Println(config)
+	fmt.Println("ResCal processing ...")
+	vegeta := os.Args[1:]
+	dockerStat := os.Args[2:]
+
+	if len(vegeta) < 1 || len(dockerStat) < 1 {
+		fmt.Println("You must pass two file result from vegeta[1] and docker stat[2]")
+	} else {
+		readDockerStat(dockerStat[0])
+	}
 }
