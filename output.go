@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -14,18 +13,14 @@ type KResources struct {
 	Requests KResource `json:"requests"`
 }
 
-func ProcessResults(r Resource) {
+func ProcessResults(r Resource) KResources {
 	result := KResources{
 		KResource{
 			Memory: convertMemoryToString(r.Memory),
 			CPU:    fmt.Sprintf("%0.0fm", r.GetMilliCPU()),
 		},
 	}
-
-	json, err := json.MarshalIndent(result, "", "\t")
-	check(err)
-
-	fmt.Println(string(json))
+	return result
 }
 
 func convertMemoryToString(r int) string {

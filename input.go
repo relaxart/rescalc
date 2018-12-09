@@ -32,17 +32,17 @@ type vegeta struct {
 }
 
 type StressResult struct {
-	Max     Resource
+	QPS     int
 	Results []Resource
 }
 
 type Resource struct {
 	QPS    int
-	CPU    float32
+	CPU    float64
 	Memory int
 }
 
-func (r *Resource) GetMilliCPU() float32 {
+func (r *Resource) GetMilliCPU() float64 {
 	return r.CPU * 1000
 }
 

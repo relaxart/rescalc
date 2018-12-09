@@ -7,14 +7,14 @@
             "memory": 100
         },
         {
-            "qps": 200,
-            "cpu": 0.2,
-            "memory": 200
+            "qps": 500,
+            "cpu": 0.5,
+            "memory": 500
         },
         {
-            "qps": 300,
-            "cpu": 0.3,
-            "memory": 300
+            "qps": 2000,
+            "cpu": 2,
+            "memory": 2000
         }
     ]
 }

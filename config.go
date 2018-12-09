@@ -9,10 +9,10 @@ import (
 
 type Config struct {
 	NodeNumber    int     `yaml:"nodeNumber"`
-	CPUPerNode    float32 `yaml:"cpuPerNode"`
+	CPUPerNode    float64 `yaml:"cpuPerNode"`
 	MemoryPerNode int     `yaml:"memoryPerNode"`
 
-	Deviation float32 `yaml:"devivation"`
+	Deviation float64 `yaml:"devivation"`
 }
 
 func ParseConfig(file string) Config {
