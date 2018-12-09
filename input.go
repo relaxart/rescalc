@@ -31,6 +31,22 @@ type vegeta struct {
 	Latencies latency
 }
 
+type StressResult struct {
+	Step    int
+	Max     Resource
+	Results []Resource
+}
+
+type Resource struct {
+	QPS    int
+	CPU    float32
+	Memory int
+}
+
+func (r *Resource) GetMilliCPU() float32 {
+	return r.CPU * 1000
+}
+
 func readDockerStat(file string) dockerStat {
 	var ds dockerStat
 
@@ -53,4 +69,16 @@ func readVegeta(file string) vegeta {
 		json.Unmarshal(f, &v)
 	}
 	return v
+}
+
+func readResult(file string) StressResult {
+	var r StressResult
+
+	f, err := ioutil.ReadFile(file)
+	if err != nil {
+		fmt.Println("Can't read file :", file, "Error : ", err)
+	} else {
+		err = json.Unmarshal(f, &r)
+	}
+	return r
 }

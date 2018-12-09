@@ -1,0 +1,7 @@
+# --- Configuration file ---
+
+nodeNumber: 10
+cpuPerNode: 1
+memoryPerNode: 200 #MiB
+
+devivation: 50 #Percentage of standard resource deviation
