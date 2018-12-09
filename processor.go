@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 func Process(c Config, m []Resource) Resource {
 	i := 0
 
@@ -13,9 +9,7 @@ func Process(c Config, m []Resource) Resource {
 			pRC = r
 		}
 
-		fmt.Println(c)
-
-		if r.CPU > c.CPUPerNode || r.Memory > c.MemoryPerNode {
+		if r.CPU > c.CPUPerNode || r.Memory > c.MemoryPerNode || checkDeviation(pRC, r, c.Deviation) {
 			break
 		}
 		pRC = r
@@ -26,23 +20,23 @@ func Process(c Config, m []Resource) Resource {
 	return pRC
 }
 
-func checkDeviation(r1 Resource, r2 Resource, d int) bool {
-	df := float32(d)
-
+func checkDeviation(r1 Resource, r2 Resource, d float32) bool {
 	cpuPerR1 := r1.CPU / float32(r1.QPS)
 	cpuPerR2 := r2.CPU / float32(r2.QPS)
-	memPerR1 := float32(r1.Memory / r2.Memory)
-	memPerR2 := float32(r2.Memory / r2.Memory)
+	memPerR1 := float32(r1.Memory / r1.QPS)
+	memPerR2 := float32(r2.Memory / r2.QPS)
 
-	fmt.Println(((cpuPerR1 - cpuPerR2) / (cpuPerR1 + cpuPerR2) / 2) * 100)
+	comp := func(a float32, b float32, d float32) bool {
+		return 100-100*a/b > d
+	}
 
-	if cpuPerR2*df/100 > cpuPerR1 {
+	if comp(cpuPerR1, cpuPerR2, d) {
 		return true
 	}
 
-	if memPerR2*df/100 > memPerR1 {
+	if comp(memPerR1, memPerR2, d) {
 		return true
 	}
 
-	return true
+	return false
 }

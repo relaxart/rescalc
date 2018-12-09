@@ -12,7 +12,7 @@ type Config struct {
 	CPUPerNode    float32 `yaml:"cpuPerNode"`
 	MemoryPerNode int     `yaml:"memoryPerNode"`
 
-	Deviation int `yaml:"devivation"`
+	Deviation float32 `yaml:"devivation"`
 }
 
 func ParseConfig(file string) Config {

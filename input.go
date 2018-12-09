@@ -32,7 +32,6 @@ type vegeta struct {
 }
 
 type StressResult struct {
-	Step    int
 	Max     Resource
 	Results []Resource
 }

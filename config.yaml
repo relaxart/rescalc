@@ -2,6 +2,6 @@
 
 nodeNumber: 10
 cpuPerNode: 1
-memoryPerNode: 200 #MiB
+memoryPerNode: 2000 #MiB
 
 devivation: 50 #Percentage of standard resource deviation
